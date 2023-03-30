@@ -173,10 +173,10 @@
   transition: 0.8s ease-in-out;
 }
 
-.thumbBox .thumb:hover {
+/* .thumbBox .thumb:hover {
   transform: scale(1.3);
   transition: 1s ease-in-out;
-}
+} */
 
 .cardInfoBox {
   margin-top: 0.8rem;
@@ -243,4 +243,63 @@
 .aside button p {
   margin-top: 0.5rem;
   font-size: 0.5rem;
+}
+
+
+
+/* VideoDetail Components */
+
+.videoDetailContainer {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.detailInfoBox {
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.detailInfoBox .tit {
+  margin-top: 0.3rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.detailInfoBox .cnBox {
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.cnBox .cnThumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.cnBox .cnTit {
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  font-size: 1.1rem;
+}
+
+.detailInfoBox .detailInfo {
+  background-color: var(--btn-bg);
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+.detailInfoBox .detailInfo:hover {
+  background-color: var(--btn-bg-hvr);
+}
+
+.detailInfo .des {
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.2px;
+}
+
+.relatedAside {
+  width: 20%;
 }

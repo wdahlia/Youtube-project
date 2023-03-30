@@ -1,4 +1,6 @@
-
+.section {
+  margin: 1rem 0;
+}
 /* nav Components */ 
 .box {
   display: flex;
@@ -13,11 +15,12 @@
 }
 
 .nav .logoBox {
-  display: flex;
-  width: 15rem;
+  column-gap: 2rem;
+  width: 12rem;
 }
 
 .logoBox .menu {
+  width: 1.5rem;
   font-size: 1.5rem;
 }
 
@@ -123,3 +126,121 @@
   margin-right: 0.5rem;
 }
 
+
+/* VideoArea */
+
+.videoContainer {
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.videoCardBtn {
+  text-align: start;
+}
+
+
+/* VideoCard */
+
+.cardBox {
+  display: flex;
+  justify-content: center;
+  column-gap: 1rem;
+  width: 100%;
+}
+
+.cardBox  .channelBox {
+  display: flex;
+  align-items: center;
+}
+
+.cardBox .channelBox .cnThumb {
+  border-radius: 100%;
+}
+
+.cardBox .thumbBox {
+  width: 360px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.thumbBox .thumb {
+  width: 360px;
+  height: 200px;
+  border-radius: 20px;
+  transition: 0.8s ease-in-out;
+}
+
+.thumbBox .thumb:hover {
+  transform: scale(1.3);
+  transition: 1s ease-in-out;
+}
+
+.cardInfoBox {
+  margin-top: 0.8rem;
+  width: 45rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+}
+
+.cardBox .tit {
+  font-weight: 500;
+  font-size: 1.2rem;
+  letter-spacing: -0.5px;
+}
+
+.channelBox .cnThumb {
+  width: 25px;
+  height: 25px;
+  margin-right: 0.5rem;
+}
+
+.channelBox .cnTit {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  color: rgb(92, 86, 86);
+}
+
+.cardBox .des {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgb(92, 86, 86);
+  letter-spacing: -0.3px;
+}
+
+/* aside Component */
+.aside {
+  width: 4.8rem;
+  margin-left: 0.5rem;
+}
+
+.aside li {
+  width: 4.5rem;
+  text-align: center;
+}
+
+.aside svg {
+  width: 1.7rem;
+  margin: 0 auto;
+}
+
+.aside button {
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem 0;
+  width: 4rem;
+}
+
+.aside button:hover {
+  background-color: var(--btn-bg);
+  border-radius: 20px;
+}
+
+.aside button p {
+  margin-top: 0.5rem;
+  font-size: 0.5rem;
+}

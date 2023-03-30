@@ -9,7 +9,7 @@ export default function SearchBar() {
           type='text' 
           placeholder='검색' 
           className='searchInput' 
-          name='searchValue' 
+          name='q' 
         />
         <i class="fa-solid fa-magnifying-glass icon"></i>
       </div>

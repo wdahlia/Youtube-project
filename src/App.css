@@ -1,38 +1,125 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* nav Components */ 
+.box {
   display: flex;
-  flex-direction: column;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0.8rem 2rem;
+  height: 4em;
 }
 
-.App-link {
-  color: #61dafb;
+.nav .logoBox {
+  display: flex;
+  width: 15rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logoBox .menu {
+  font-size: 1.5rem;
 }
+
+.logoBox svg {
+  width: 7rem;
+}
+
+
+/* searchBar Components */
+
+.searchBox {
+  width: 35em;
+}
+
+.form {
+  display: flex;
+  border-radius: 20px;
+}
+
+.form .searchInput {
+  width: 25rem;
+  border: 1px solid var(--input-bd);
+  padding: 0.8rem 1rem 0.8rem 2rem;
+  border-radius: 18px 0 0 18px;
+  transition: 0.6s ease-in-out;
+}
+
+.inputBox {
+  position: relative;
+}
+
+.form .inputBox .icon {
+  display: none;
+}
+
+
+.form .searchInput:focus {
+  width: 30rem;
+  padding-left: 3rem;
+  transition: 0.6s ease-in-out;
+  background-color: var(--fcs-bg);
+}
+
+.form .searchInput:focus + .icon {
+  display: block;
+  position: absolute; 
+  top: 0.8rem;
+  left: 1rem;
+  color: var(--input-icon);
+}
+
+.form .searchBtn {
+  position: relative;
+  border-radius: 0 18px 18px 0;
+  width: 4rem;
+  background-color: var(--btn-bg);
+  border: 1px solid var(--input-bd);
+  border-left: none;
+}
+
+.form .searchBtn:hover {
+  background-color: var(--btn-bg-hvr);
+}
+
+.form .searchBtn .searchIcon {
+  font-size: 1.5rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  vertical-align: middle;
+}
+
+
+/* Nav UserContainer 부분 */
+.userBox {
+  column-gap: 1rem;
+}
+.userBox .mode {
+  font-size: 1.8rem;
+  vertical-align: middle;
+}
+
+.userBox .login {
+  width: 6.5rem;
+  padding: 0.5rem 0.2rem;
+  border: 1px solid var(--input-bd);
+  border-radius: 20px;
+  font-size: 1rem;
+  color: rgb(12, 102, 198);
+}
+
+.userBox .login:hover {
+  background-color:rgb(228, 239, 252);
+}
+
+.userBox .login span {
+  vertical-align: middle;
+  letter-spacing: -0.5px;
+}
+
+.userBox .userIcon {
+  font-size: 1.5rem;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+

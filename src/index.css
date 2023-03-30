@@ -1,3 +1,31 @@
+
+:root { 
+  --input-bd: #D8D4D4;
+  --fcs-bg: #F5F9FD;
+  --input-icon: #D8D4D4;
+  --btn-bg: #EEEEEE;
+  --btn-bg-hvr: #E1DFDF;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+input {
+  border: none;
+  background-color: initial;
+  outline: none;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: initial;
+  cursor: pointer;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

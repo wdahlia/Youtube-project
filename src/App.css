@@ -1,5 +1,7 @@
 .section {
-  margin: 1rem 0;
+  margin: 1.2rem 2rem;
+  justify-content: center;
+  column-gap: 2rem;
 }
 /* nav Components */ 
 .box {
@@ -249,18 +251,13 @@
 
 /* VideoDetail Components */
 
-.videoDetailContainer {
-  width: 70%;
-  margin: 0 auto;
-}
-
 .detailInfoBox {
   flex-direction: column;
   row-gap: 0.5rem;
 }
 
 .detailInfoBox .tit {
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.2px;
@@ -284,6 +281,7 @@
 }
 
 .detailInfoBox .detailInfo {
+  max-width: 50rem;
   background-color: var(--btn-bg);
   border-radius: 20px;
   padding: 1rem;
@@ -293,13 +291,56 @@
   background-color: var(--btn-bg-hvr);
 }
 
-.detailInfo .des {
-  margin-top: 1rem;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: -0.2px;
+.detailInfo h3 {
+  font-size: 0.8rem;
 }
 
-.relatedAside {
-  width: 20%;
+.detailInfo .des {
+  margin-top: 1rem;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: -0.1px;
+  line-height: 1.5;
 }
+
+.detailVideo {
+  column-gap: 0.6rem;
+  row-gap: 1rem;
+}
+
+.relatedAsideArea {
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+
+.relatedAside .detailVideo .thumb {
+  width: 240px;
+  height: 130px;
+  border-radius: 20px;
+}
+
+.detailVideo .relVideoInfo {
+  flex-direction: column;
+  row-gap: 0.3rem;
+  width: 15rem;
+}
+
+.relVideoInfo .tit {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #0f0f0f;
+  letter-spacing: -0.3px;
+}
+
+.relVideoInfo .cnTit {
+  color: #606060;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.relVideoInfo .time {
+  color: #606060;
+}
+

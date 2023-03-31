@@ -1,8 +1,10 @@
 import React from 'react';
-import mockVideoDetail from '../api/mockVideoDetail';
-import relatedVideos from '../api/mockRelatedVideo';
+import mockVideoDetail from '../mockVideoDetail';
+import relatedVideos from '../mockRelatedVideo';
+import RelatedVideo from '../components/RelatedVideo';
 
 export default function VideoDetail({ channelUrl }) {
+
   const videoId = mockVideoDetail.items[0].id;
   const detailData = mockVideoDetail.items[0].snippet;
   const { publishedAt, title, description, channelTitle, contentDetails } = detailData;
@@ -13,17 +15,36 @@ export default function VideoDetail({ channelUrl }) {
 
   console.log(publishTime);
 
+
+  // relatedVideo 
+  const relVideos = relatedVideos;
+  const { items } = relVideos;
+
   return (
     <>
       <article className='videoDetailContainer'>
-        <iframe 
-          id="ytplayer" 
-          type="text/html" 
-          width="1000" 
-          height="600"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-          frameborder="0">
-        </iframe>
+        <div style={{ width: '800px', height: '500px', position: 'relative'}}> 
+          <div style={{ width: '780px', height: '460px', position: 'relative', overflow: 'hidden', filter: 'blur(55px)' }}>
+            <iframe 
+              id="ytplayer" 
+              type="text/html" 
+              width="1080" 
+              height="580"
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&volume=0`}
+              frameborder="0"
+              style={{ position: 'absolute', left: '0', top: '0', zIndex: '-2', filter: 'blur(100px)' }}>
+            </iframe>
+          </div>
+          <iframe 
+              id="ytplayer" 
+              type="text/html" 
+              width="800" 
+              height="480"
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
+              frameborder="0"
+              style={{ position: 'absolute', filter: 'blur(0px)', top: '0', textAlign: 'center', objectFit: 'cover' }}>
+          </iframe>
+        </div>
         <div className='detailInfoBox box'>
           <h1 className='tit'>{title}</h1>
           <div className='cnBox box'>
@@ -38,7 +59,9 @@ export default function VideoDetail({ channelUrl }) {
         </div>
       </article>
       <section className='relatedAside'>
-
+        <ul class='relatedAsideArea box'>
+            { items.map((item) => <RelatedVideo key={item.id.videoId} videoId={item.id.videoId} data={item.snippet} />) }
+        </ul>
       </section>
     </>
   );

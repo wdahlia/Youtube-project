@@ -1,5 +1,5 @@
 import React from 'react';
-import mockData from '../api/mockSearchData'
+import mockData from '../mockSearchData'
 import VideoCard from '../components/VideoCard';
 
 export default function VideoArea() {

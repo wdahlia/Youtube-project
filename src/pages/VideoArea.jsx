@@ -9,7 +9,7 @@ export default function VideoArea() {
   const { items } = data;
   return (
     <article className='videoContainer box'>
-      { items.map((item => <button className='videoCardBtn'><VideoCard key={item.id.videoId} data={item.snippet} videoId={item.id.videoId} channelUrl={channelUrl}/></button>))}
+      { items.map((item => <button className='videoCardBtn'><VideoCard key={item.id.videoId} data={item.snippet} videoId={item.id.videoId} channelUrl={channelUrl} static='null' /></button>))}
     </article>
   );
 }

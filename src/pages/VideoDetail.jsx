@@ -3,10 +3,11 @@ import mockVideoDetail from '../mockVideoDetail';
 import relatedVideos from '../mockRelatedVideo';
 import RelatedVideo from '../components/RelatedVideo';
 import VideoCard from '../components/VideoCard';
+import { useYoutubeContext } from '../context/YoutubeProvider';
 
 
 export default function VideoDetail({ channelUrl }) {
-
+  const { mode } = useYoutubeContext();
   const videoId = mockVideoDetail.items[0].id;
   const detailData = mockVideoDetail.items[0].snippet;
   const { publishedAt, title, description, channelTitle, contentDetails } = detailData;
@@ -24,7 +25,7 @@ export default function VideoDetail({ channelUrl }) {
     <>
       <article className='videoDetailContainer'>
         <div style={{ width: '800px', height: '500px', position: 'relative'}}> 
-          <div style={{ width: '780px', height: '460px', position: 'relative', top: '13px', overflow: 'hidden', filter: 'blur(45px)' }}>
+          { mode ? <div style={{ width: '780px', height: '460px', position: 'relative', top: '13px', overflow: 'hidden', filter: 'blur(200px)' }}>
             <iframe 
               id="ytplayer" 
               type="text/html" 
@@ -32,9 +33,9 @@ export default function VideoDetail({ channelUrl }) {
               height="580"
               src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
               frameBorder="0"
-              style={{ position: 'absolute', left: '0', top: '0', zIndex: '-2', filter: 'blur(90px)' }}>
+              style={{ pointerEvents: 'none', cursor: 'none', position: 'absolute', left: '0', top: '0', zIndex: '-200', filter: 'blur(200px)' }}>
             </iframe>
-          </div>
+          </div> : null }
           <iframe 
               id="ytplayer" 
               type="text/html" 

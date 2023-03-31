@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
+import { useYoutubeContext } from '../context/YoutubeProvider';
 
 export default function ChangeMode() {
-
-  const [mode, setMode] = useState(false);
+  const { handleMode, mode } = useYoutubeContext();
 
   return (
-    <button onClick={() => setMode(!mode)}>
+    <button onClick={handleMode}>
       { mode ? 
         <MdLightMode className='mode' /> : 
-        <MdDarkMode className='mode dark'/>
+        <MdDarkMode className='mode'/>
       }
     </button>
   )

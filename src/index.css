@@ -1,22 +1,44 @@
 
 :root { 
+  --mode-btn: #82AFE2;
+  --bg: #FFFFFF;
   --input-bd: #D8D4D4;
   --fcs-bg: #F5F9FD;
   --input-icon: #D8D4D4;
   --btn-bg: #EEEEEE;
   --btn-bg-hvr: #E1DFDF;
+  --txt: #0f0f0f;
+  --sub-txt: #606060;
+  --login-txt: #0C66C6;
+  --login-bg: #E4EFFC;
+  --info-bg: #EEEEEE;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* background-color: #000000; */
+  background-color: var(--bg);
+}
+
+.dark {
+  --mode-btn: #A49A65;
+  --bg: #1b1a1a;
+  --input-bd: #303030;
+  --fcs-bg: #1F2020;
+  --input-icon: #D8D4D4;
+  --btn-bg: #000000;
+  --btn-bg-hvr: #2b2a2a;
+  --txt: #F1F1F1;
+  --sub-txt: #AAAAAA;
+  --login-txt: #0C66C6;
+  --login-bg: #3EA5FF3B;
+  --info-bg: #FFFFFF1A;
 }
 
 input {
   border: none;
-  background-color: initial;
+  background-color: inherit;
   outline: none;
 }
 
@@ -35,6 +57,11 @@ img {
   pointer-events: none;
 }
 
+
+h1, h2, h3, h4, h5, p, svg, pre, span {
+  background-color: initial;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -42,6 +69,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: inherit;
 }
 
 code {

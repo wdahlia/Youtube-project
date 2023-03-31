@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { changeDateFormat } from '../util/date';
 
-export default function VideoCard({ data, videoId, channelurl }) {
+export default function VideoCard({ data, videoId, channelUrl }) {
   const [hover, setHover] = useState(false);
   let { channelTitle, title, thumbnails, channelId, description, publishTime } = data;
   const thumb = thumbnails.medium.url;
   title = title.replace('&#39;', "'")
   title = title.replace('&#39;', "'")
+
+  publishTime = new Date(publishTime);
+  publishTime = changeDateFormat(publishTime);
 
 
   // publishTime ~일전, ~주전 표시는 day.js 라이브러리 사용해서 진행할 것
@@ -20,7 +24,7 @@ export default function VideoCard({ data, videoId, channelurl }) {
             width="360" 
             height="200"
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
-            frameborder="0"
+            frameBorder="0"
             style={{ objectFit : 'fill', transform: 'scale(1.02)'}}>
           </iframe> : 
           <img src={thumb} className='thumb' />
@@ -29,7 +33,7 @@ export default function VideoCard({ data, videoId, channelurl }) {
       <div className='cardInfoBox box'>
         <h1 className='tit'>{title}</h1>
         <div className='channelBox'>
-          <img className='cnThumb' src={channelurl} />
+          <img className='cnThumb' src={channelUrl} />
           <p className='cnTit'>{channelTitle}</p>
         </div>
         <p className='des'>{description}</p>

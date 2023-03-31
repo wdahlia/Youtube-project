@@ -11,7 +11,7 @@ export default function SearchBar() {
           className='searchInput' 
           name='q' 
         />
-        <i class="fa-solid fa-magnifying-glass icon"></i>
+        <i className="fa-solid fa-magnifying-glass icon"></i>
       </div>
       <button className='searchBtn'>
         <CiSearch className='searchIcon' />

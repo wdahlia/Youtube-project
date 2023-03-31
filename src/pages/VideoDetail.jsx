@@ -2,6 +2,8 @@ import React from 'react';
 import mockVideoDetail from '../mockVideoDetail';
 import relatedVideos from '../mockRelatedVideo';
 import RelatedVideo from '../components/RelatedVideo';
+import VideoCard from '../components/VideoCard';
+
 
 export default function VideoDetail({ channelUrl }) {
 
@@ -13,8 +15,6 @@ export default function VideoDetail({ channelUrl }) {
   
   publishTime = `${publishTime.getFullYear()}. ${publishTime.getMonth() + 1}. ${publishTime.getDate()}`
 
-  console.log(publishTime);
-
 
   // relatedVideo 
   const relVideos = relatedVideos;
@@ -24,15 +24,15 @@ export default function VideoDetail({ channelUrl }) {
     <>
       <article className='videoDetailContainer'>
         <div style={{ width: '800px', height: '500px', position: 'relative'}}> 
-          <div style={{ width: '780px', height: '460px', position: 'relative', overflow: 'hidden', filter: 'blur(55px)' }}>
+          <div style={{ width: '780px', height: '460px', position: 'relative', top: '13px', overflow: 'hidden', filter: 'blur(45px)' }}>
             <iframe 
               id="ytplayer" 
               type="text/html" 
               width="1080" 
               height="580"
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&volume=0`}
-              frameborder="0"
-              style={{ position: 'absolute', left: '0', top: '0', zIndex: '-2', filter: 'blur(100px)' }}>
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
+              frameBorder="0"
+              style={{ position: 'absolute', left: '0', top: '0', zIndex: '-2', filter: 'blur(90px)' }}>
             </iframe>
           </div>
           <iframe 
@@ -40,8 +40,8 @@ export default function VideoDetail({ channelUrl }) {
               type="text/html" 
               width="800" 
               height="480"
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
-              frameborder="0"
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&volume=0`}
+              frameBorder="0"
               style={{ position: 'absolute', filter: 'blur(0px)', top: '0', textAlign: 'center', objectFit: 'cover' }}>
           </iframe>
         </div>
@@ -59,8 +59,8 @@ export default function VideoDetail({ channelUrl }) {
         </div>
       </article>
       <section className='relatedAside'>
-        <ul class='relatedAsideArea box'>
-            { items.map((item) => <RelatedVideo key={item.id.videoId} videoId={item.id.videoId} data={item.snippet} />) }
+        <ul className='relatedAsideArea box'>
+            { items.map((item) => <RelatedVideo key={item.id.videoId} videoId={item.id.videoId} data={item.snippet} channelUrl={null} />) }
         </ul>
       </section>
     </>

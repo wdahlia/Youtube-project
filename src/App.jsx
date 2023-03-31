@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <Nav />
       <section className='section box'>
-        <VideoDetail channelUrl={channelUrl}/>
+        <VideoDetail channelUrl={channelUrl} />
       </section>
     </div>
   );

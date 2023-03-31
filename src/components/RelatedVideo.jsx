@@ -1,7 +1,11 @@
 import React from 'react';
+import { changeDateFormat } from '../util/date';
+
 
 export default function RelatedVideo({ videoId, data }) {
-  const { publishedAt, title, thumbnails, channelTitle } = data;
+  let { publishedAt, title, thumbnails, channelTitle } = data;
+  publishedAt = new Date(publishedAt);
+  publishedAt = changeDateFormat(publishedAt);
   return (
     <li className='detailVideo box'>
       <img src={thumbnails.medium.url} className='thumb' />

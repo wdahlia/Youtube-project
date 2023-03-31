@@ -1,5 +1,5 @@
 .section {
-  margin: 1.2rem 2rem;
+  margin: 1.2rem 0;
   justify-content: center;
   column-gap: 2rem;
 }
@@ -342,5 +342,9 @@
 
 .relVideoInfo .time {
   color: #606060;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: -0.3px;
 }
+
 

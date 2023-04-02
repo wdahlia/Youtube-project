@@ -11,11 +11,18 @@ export default function YoutubeProvider({ children }) {
     DarkModeToggle(mode);
   }
 
+
+  // 함수 정의 dispatch 해서 reducer에서 실행시켜줄 값들 정의
+
+  // const handleSubmit = () => {
+  //   dispatch({ action: 'SUBMIT_SEARCH'})
+  // }
+
   return (
     <YoutubeContext.Provider
       value={{
         handleMode, 
-        mode
+        mode,
        }}>
         { children }
     </YoutubeContext.Provider>

@@ -12,7 +12,7 @@ export default function Nav() {
     <div className='nav'>
       <div className='logoBox box'>
         <RxHamburgerMenu className='menu' />
-        <div onClick={() => navigate('/')}>
+        <div onClick={() => navigate('/')} className='logo'>
           <svg viewBox="0 0 90 20" preserveAspectRatio="xMidYMid meet" focusable="false" style={{ pointerEvents: 'none', display: 'block' }}>
             <g viewBox="0 0 90 20" preserveAspectRatio="xMidYMid meet" fill='white'>
               <g>

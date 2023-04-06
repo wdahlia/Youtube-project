@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { changeDateFormat } from '../util/date';
 import { useQuery } from '@tanstack/react-query';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function VideoCard({ data, videoId, ...res }) {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
   let { channelTitle, title, thumbnails, channelId, description, publishTime, publishedAt } = data;
   const thumb = thumbnails.medium.url;
-  title = decodeURI(title);
+  title = title.replace(/&#39;/g, "'");
+
 
   publishTime = new Date(publishTime);
   publishedAt = new Date(publishedAt);

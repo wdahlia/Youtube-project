@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { changeDateFormat } from '../util/date';
 
-export default function VideoCard({ data, videoId, channelUrl, statics }) {
+export default function VideoCard({ data, videoId, channelUrl, ...res }) {
   const [hover, setHover] = useState(false);
   let { channelTitle, title, thumbnails, channelId, description, publishTime, publishedAt } = data;
   const thumb = thumbnails.medium.url;
@@ -13,14 +13,10 @@ export default function VideoCard({ data, videoId, channelUrl, statics }) {
   publishTime = changeDateFormat(publishTime);
   publishedAt = changeDateFormat(publishedAt);
 
-  if (statics) {
-    let { viewCount } = statics;
-  }
-
   // publishTime ~일전, ~주전 표시는 day.js 라이브러리 사용해서 진행할 것
   
   return (
-    <div className={ statics ? `cardBox vtc` : `cardBox` }>
+    <div className={ res.main ? `cardBox vtc` : `cardBox` }>
       <div className='thumbBox' onMouseOver={() => setHover(true)} onMouseLeave={() => setHover(false)}>
         { hover ?  
           <iframe 
@@ -35,14 +31,14 @@ export default function VideoCard({ data, videoId, channelUrl, statics }) {
           <img src={thumb} className='thumb' />
         }
       </div>
-      <div className={ statics ? `cardInfoBox box vtc` : `cardInfoBox box`}>
-        <h1 className={ statics ? `tit vtc` : `tit`}>{title}</h1>
+      <div className={ res.main ? `cardInfoBox box vtc` : `cardInfoBox box`}>
+        <h1 className={ res.main ? `tit vtc` : `tit`}>{title}</h1>
         <div className='channelBox'>
           <img className='cnThumb' src={channelUrl} />
           <p className='cnTit'>{channelTitle}</p>
         </div>
-        { statics ? null : <p className='des'>{description}</p> }
-        <p className='time'>{ statics ? publishedAt : publishTime }</p>
+        { res.main ? null : <p className='des'>{description}</p> }
+        <p className='time'>{ res.main ? publishedAt : publishTime }</p>
       </div>
     </div>
   );

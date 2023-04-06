@@ -13,6 +13,20 @@
 .mode {
   color: var(--mode-btn);
 }
+
+
+.tit {
+  color: var(--txt);
+}
+
+.time {
+  color: var(--sub-txt);
+}
+
+.cnTit {
+  color: var(--sub-txt);
+}
+
 /* nav Components */ 
 .box {
   display: flex;
@@ -59,6 +73,7 @@
   padding: 0.8rem 1rem 0.8rem 2rem;
   border-radius: 18px 0 0 18px;
   transition: width 0.6s ease-in-out;
+  color: var(--txt);
 }
 
 .inputBox {
@@ -257,11 +272,13 @@
 .aside li {
   width: 4.5rem;
   text-align: center;
+  color: var(--txt);
 }
 
 .aside svg {
   width: 1.7rem;
   margin: 0 auto;
+  fill: var(--txt);
 }
 
 .aside button {

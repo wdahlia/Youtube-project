@@ -9,6 +9,10 @@ import YoutubeProvider from './context/YoutubeProvider';
 import Main from './pages/Main';
 import VideoArea from './pages/VideoArea';
 import VideoDetail from './pages/VideoDetail';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -24,11 +28,15 @@ const router = createBrowserRouter([
     element : <VideoDetail />,
   }
 ]);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <YoutubeProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </YoutubeProvider>
   </React.StrictMode>
 );

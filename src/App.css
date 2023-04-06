@@ -324,6 +324,7 @@
 .detailInfoBox {
   flex-direction: column;
   row-gap: 0.5rem;
+  width: 800px;
 }
 
 .detailInfoBox .tit {

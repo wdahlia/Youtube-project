@@ -1,17 +1,42 @@
 import React from 'react';
 import { changeDateFormat } from '../util/date';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 
 export default function RelatedVideo({ videoId, data }) {
   const navigate = useNavigate();
-  let { publishedAt, title, thumbnails, channelTitle } = data;
+
+  let { publishedAt, title, thumbnails, channelTitle, channelId } = data;
   publishedAt = new Date(publishedAt);
   publishedAt = changeDateFormat(publishedAt);
 
+
+  const instance = axios.create({
+    baseURL : 'https://youtube.googleapis.com/youtube/v3',
+    params : { key : process.env.REACT_APP_YOUTUBE_SECRET_KEY }
+  });
+
+  const { data: url } = useQuery({
+    queryKey : ['channel', channelId ],
+    queryFn : () => instance.get('/channels/', {
+      params : {
+        part : 'snippet',
+        id : channelId
+      } 
+    }).then((res) => {
+      return res.data.items[0].snippet.thumbnails.medium.url
+    }),
+    retry : 1,
+    staleTime : 1000 * 60 * 1000,
+  });
+
+
   const moveToDetail = () => {
-    navigate(`/watch?v=${videoId}`);
+    navigate(`/watch?v=${videoId}`, { state : { data, videoId,  url } });
   }
+
   return (
     <li 
       className='detailVideo box'

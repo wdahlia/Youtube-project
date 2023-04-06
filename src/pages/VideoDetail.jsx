@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export default function VideoDetail() {
   const { state } = useLocation();
+
   const { data, videoId, url } = state;
   const { title, publishedAt, description, channelTitle } = data;
 
@@ -37,7 +38,6 @@ export default function VideoDetail() {
         type : 'video',
       }
     }).then((res) => {
-      console.log(res.data.items)
       return res.data.items
     }),
     retry : 1,
@@ -72,7 +72,7 @@ export default function VideoDetail() {
         <div className='detailInfoBox box'>
           <h1 className='tit'>{title}</h1>
           <div className='cnBox box'>
-            <img src={url} className='cnThumb' />
+            { url && <img src={url} className='cnThumb' /> }
             <p className='cnTit'>{channelTitle}</p>
             <button>구독</button>
           </div>
@@ -84,7 +84,7 @@ export default function VideoDetail() {
       </article>
       <section className='relatedAside'>
         <ul className='relatedAsideArea box'>
-            { videos && videos.map((item) => <RelatedVideo key={item.id.videoId} videoId={item.id.videoId} data={item.snippet} channelUrl={null} />) }
+            { videos && videos.map((item) => <RelatedVideo key={item.id.videoId} videoId={item.id.videoId} data={item.snippet} />) }
         </ul>
       </section>
     </>

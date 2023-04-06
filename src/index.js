@@ -34,7 +34,7 @@ root.render(
   <React.StrictMode>
     <YoutubeProvider>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+          <RouterProvider router={router} />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </YoutubeProvider>

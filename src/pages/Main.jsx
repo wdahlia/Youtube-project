@@ -1,6 +1,5 @@
 import React from 'react';
 import VideoCard from '../components/VideoCard';
-import mockMostPopularData from '../mockMostPopularData';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 

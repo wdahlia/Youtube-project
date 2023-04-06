@@ -12,6 +12,7 @@
   --login-txt: #0C66C6;
   --login-bg: #E4EFFC;
   --info-bg: #EEEEEE;
+  --card-bg: #1212130E;
 }
 
 * {
@@ -34,6 +35,7 @@
   --login-txt: #0C66C6;
   --login-bg: #3EA5FF3B;
   --info-bg: #FFFFFF1A;
+  --card-bg: #8E898919;
 }
 
 input {

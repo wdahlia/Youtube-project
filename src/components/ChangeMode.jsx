@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import { useYoutubeContext } from '../context/YoutubeProvider';
 

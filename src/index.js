@@ -11,6 +11,7 @@ import VideoArea from './pages/VideoArea';
 import VideoDetail from './pages/VideoDetail';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import Aside from './components/Aside';
 
 const queryClient = new QueryClient();
 
@@ -19,14 +20,28 @@ const router = createBrowserRouter([
     path : '/',
     element : <Root />,
     children : [
-      { index : true, element : <Main /> },
-      { path : '/?q=searchId', element : <VideoArea /> },
+      { index : true, 
+        element : (
+        <>
+          <Aside /> 
+          <Main />
+        </>
+        ) 
+      },
+      { path : '/results', 
+        element : (
+          <>
+            <Aside /> 
+            <VideoArea />
+          </>
+        )  
+      },
+      {
+        path : '/watch',
+        element : <VideoDetail />,
+      }
     ]
   },
-  {
-    path : '/:videoId',
-    element : <VideoDetail />,
-  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,9 +1,7 @@
 import React from 'react';
 import { CiSearch } from 'react-icons/ci';
-import { useYoutubeContext } from '../context/YoutubeProvider';
 
 export default function SearchBar() {
-  const { handleSubmit } = useYoutubeContext();
   return (
     <form className='form' onSubmit={(e) => {
       e.preventDefault();

@@ -36,9 +36,8 @@ export default function VideoCard({ data, videoId, ...res }) {
     staleTime : 1000 * 60 * 1000,
   })
 
-  console.log(location)
   const moveToDetail = () => {
-    navigate(`/watch?v=${videoId}`);
+    navigate(`/watch?v=${videoId}`, { state : { data, videoId, url } });
   }
 
 

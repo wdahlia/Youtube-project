@@ -1,25 +1,48 @@
 import React from 'react';
-import mockVideoDetail from '../mockVideoDetail';
 import relatedVideos from '../mockRelatedVideo';
 import RelatedVideo from '../components/RelatedVideo';
 import VideoCard from '../components/VideoCard';
 import { useYoutubeContext } from '../context/YoutubeProvider';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
 
-export default function VideoDetail({ channelUrl }) {
+export default function VideoDetail() {
+  const { state } = useLocation();
+  const { data, videoId, url } = state;
+  const { title, publishedAt, description, channelTitle } = data;
+
+  // state로 해서 id 값을 가져온다
+
   const { mode } = useYoutubeContext();
-  const videoId = mockVideoDetail.items[0].id;
-  const detailData = mockVideoDetail.items[0].snippet;
-  const { publishedAt, title, description, channelTitle, contentDetails } = detailData;
 
   let publishTime = new Date(publishedAt);
-  
   publishTime = `${publishTime.getFullYear()}. ${publishTime.getMonth() + 1}. ${publishTime.getDate()}`
 
+  // related Video값 fetching 해오기
 
-  // relatedVideo 
-  const relVideos = relatedVideos;
-  const { items } = relVideos;
+  const instance = axios.create({
+    baseURL : 'https://youtube.googleapis.com/youtube/v3',
+    params : { key : process.env.REACT_APP_YOUTUBE_SECRET_KEY }
+  });
+
+  const { isLoading, isError, data : videos } = useQuery({
+    queryKey : ['relVideos', videoId ],
+    queryFn : () => instance.get('/search/', {
+      params : {
+        part : 'snippet',
+        relatedToVideoId : videoId,
+        maxResults : 25,
+        type : 'video',
+      }
+    }).then((res) => {
+      console.log(res.data.items)
+      return res.data.items
+    }),
+    retry : 1,
+    staleTime : 1000 * 60 * 100,
+  });
 
   return (
     <>
@@ -49,7 +72,7 @@ export default function VideoDetail({ channelUrl }) {
         <div className='detailInfoBox box'>
           <h1 className='tit'>{title}</h1>
           <div className='cnBox box'>
-            <img src={channelUrl} className='cnThumb' />
+            <img src={url} className='cnThumb' />
             <p className='cnTit'>{channelTitle}</p>
             <button>구독</button>
           </div>
@@ -61,7 +84,7 @@ export default function VideoDetail({ channelUrl }) {
       </article>
       <section className='relatedAside'>
         <ul className='relatedAsideArea box'>
-            { items.map((item) => <RelatedVideo key={item.id.videoId} videoId={item.id.videoId} data={item.snippet} channelUrl={null} />) }
+            { videos && videos.map((item) => <RelatedVideo key={item.id.videoId} videoId={item.id.videoId} data={item.snippet} channelUrl={null} />) }
         </ul>
       </section>
     </>

@@ -27,7 +27,7 @@ export default function VideoArea() {
       return res.data.items;
     }),
     retry : 1,
-    staletTime : 1000 * 60 * 200,
+    staleTime : 1000 * 60 * 200,
   });
 
   return (

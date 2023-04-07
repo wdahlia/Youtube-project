@@ -17,24 +17,34 @@ export default function VideoCard({ data, videoId, ...res }) {
   publishTime = changeDateFormat(publishTime);
   publishedAt = changeDateFormat(publishedAt);
 
+  // channel url, 구독자 수 가져오기
   const instance = axios.create({
     baseURL : 'https://youtube.googleapis.com/youtube/v3',
     params : { key : process.env.REACT_APP_YOUTUBE_SECRET_KEY }
   });
 
-  const { data: url } = useQuery({
+  const { isLoading, data : channels } = useQuery({
     queryKey : ['channel', channelId ],
     queryFn : () => instance.get('/channels/', {
       params : {
-        part : 'snippet',
+        part : 'snippet,statistics',
         id : channelId
       } 
     }).then((res) => {
-      return res.data.items[0].snippet.thumbnails.medium.url
+      return res.data.items[0];
     }),
-    retry : 1,
-    staleTime : 1000 * 60 * 1000,
+    retry : 2,
+    staleTime : 1000 * 60 * 100,
   })
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  console.log(channels);
+
+  const { snippet : { thumbnails : { medium : { url }}}, statistics : { subscriberCount } } = channels;
+
 
   const moveToDetail = () => {
     navigate(`/watch?v=${videoId}`, { state : { data, videoId, url } });
@@ -70,6 +80,7 @@ export default function VideoCard({ data, videoId, ...res }) {
         <div className='channelBox'>
           { url && <img className='cnThumb' src={url} alt='channelThumbnail'/> }
           <p className='cnTit'>{channelTitle}</p>
+          <p>{subscriberCount}</p>
         </div>
         { res.main ? null : <p className='des'>{description}</p> }
         <p className='time'>{ res.main ? publishedAt : publishTime }</p>

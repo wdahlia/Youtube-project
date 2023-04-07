@@ -12,8 +12,11 @@ export default function VideoDetail() {
   const { state } = useLocation();
 
   const { data, videoId, url } = state;
-  const { title, publishedAt, description, channelTitle } = data;
+  let { title, publishedAt, description, channelTitle } = data;
 
+  title = title.replace(/&#39;/g, "'");
+
+  console.log(description);
   // state로 해서 id 값을 가져온다
 
   const { mode } = useYoutubeContext();
@@ -78,7 +81,7 @@ export default function VideoDetail() {
           </div>
           <div className='detailInfo'>
             <h3>{publishTime}</h3>
-            <pre className='des'>{description}</pre>
+            <p className='des'>{description}</p>
           </div>
         </div>
       </article>

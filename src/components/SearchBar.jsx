@@ -9,6 +9,7 @@ export default function SearchBar() {
       e.preventDefault()
       const inputValue = document.getElementById('searchInput');
       const { name, value } = inputValue;
+      value && inputValue.classList.remove(':focus');
       navigate(`/results?${name}=${value}`, { state : value });
       // handleSubmit(searchText);
       // handleSubmit이라는 함수 실행시키고 그 값은 dispatch해서 실행시키는데 이때 navigate(?q=search 컴포넌트 보여주는식으로 가야함)

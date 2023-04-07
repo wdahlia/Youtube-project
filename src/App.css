@@ -111,6 +111,7 @@
   background-color: var(--fcs-bg);
 }
 
+
 .form .searchBtn {
   position: relative;
   border-radius: 0 18px 18px 0;
@@ -177,7 +178,7 @@
 .videoContainer {
   flex-direction: column;
   row-gap: 1rem;
-  width: 80%;
+  width: 60%;
   margin: 2rem auto;
 }
 
@@ -387,6 +388,8 @@
   letter-spacing: -0.1px;
   line-height: 1.5;
   background-color: initial;
+  width: 100%;
+  white-space: pre;
 }
 
 .detailVideo {
@@ -425,6 +428,9 @@
   font-size: 0.92rem;
   color: var(--txt);
   letter-spacing: -0.3px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .relVideoInfo .cnTit {

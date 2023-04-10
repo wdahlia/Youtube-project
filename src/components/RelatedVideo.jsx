@@ -39,7 +39,6 @@ export default function RelatedVideo({ videoId, data }) {
 
   let { snippet : { thumbnails : { medium : { url }}}, statistics : { subscriberCount : count } } = channels;
 
-  console.log(count)
   count = viewCount(count)
   const moveToDetail = () => {
     navigate(`/watch?v=${videoId}`, { state : { data, videoId, url } });

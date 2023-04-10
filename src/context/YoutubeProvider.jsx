@@ -5,12 +5,17 @@ const YoutubeContext = createContext();
 export default function YoutubeProvider({ children }) {
 
   const [mode, setMode] = useState(false);
+  // const [open, setOpen] = useState(false);
 
   const handleMode = () => {
     setMode(!mode);
     DarkModeToggle(mode);
   }
 
+  // const handleOpen = () => {
+  //   setMode(!open);
+  //   OpenTabToggle(open);
+  // }
 
   // 함수 정의 dispatch 해서 reducer에서 실행시켜줄 값들 정의
 

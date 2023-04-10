@@ -7,7 +7,8 @@ import { useNavigate, Link } from 'react-router-dom';
 
 export default function Nav() {
   const navigate = useNavigate();
-
+  
+  // onClick 되면, aside가 바뀌어야함
   return (
     <div className='nav'>
       <div className='logoBox box'>

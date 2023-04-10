@@ -13,6 +13,11 @@
   --login-bg: #E4EFFC;
   --info-bg: #EEEEEE;
   --card-bg: #1212130E;
+  --subscribe-btn: #000000;
+  --subscribe-txt: #FFFFFF;
+  --subscribe-hvr: #262626;
+  --chn-btn: #d6d5d54b;
+  --chn-hvr: #bbbbbb5b;
 }
 
 * {
@@ -36,6 +41,11 @@
   --login-bg: #3EA5FF3B;
   --info-bg: #FFFFFF1A;
   --card-bg: #8E898919;
+  --subscribe-btn: #FFFFFF;
+  --subscribe-txt: #000000;
+  --subscribe-hvr: #dedcdc;
+  --chn-btn: #FFFFFF1A;
+  --chn-hvr: #ffffff32;
 }
 
 input {

@@ -24,6 +24,7 @@ export default function VideoArea() {
         regionCode : 'KR',
       }
     }).then((res) => {
+      console.log(res.data);
       return res.data.items;
     }),
     retry : 1,

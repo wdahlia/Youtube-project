@@ -349,20 +349,76 @@
 .detailInfoBox .cnBox {
   align-items: center;
   column-gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.cnBox .titBox {
+  column-gap: 0.5rem;
 }
 
 .cnBox .cnThumb {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 100%;
 }
 
 .cnBox .cnTit {
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  font-size: 1.08rem;
+  color: var(--txt);
+  align-self: center;
+}
+
+.cnBox .bt {
+  padding: 0.6rem 1rem;
   font-weight: 600;
-  letter-spacing: -0.5px;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
+}
+
+.cnBox .dt {
+  column-gap: 1rem;
+}
+
+.cnBox .chn {
+  background-color: var(--chn-btn);
   color: var(--txt);
 }
+
+.cnBox .subscribe {
+  background-color: var(--subscribe-btn);
+  color: var(--subscribe-txt);
+  border-radius: 30px;
+}
+
+.cnBox .subscribe:hover {
+  background-color: var(--subscribe-hvr);
+}
+
+.cnBox .share {
+  border-radius: 30px;
+}
+
+.cnBox .like {
+  border-radius: 30px 0 0 30px;
+}
+
+.cnBox .dislike {
+  border-radius: 0 30px 30px 0;
+}
+
+.cnBox .like:hover,
+.cnBox .dislike:hover,
+.cnBox .share:hover,
+.cnBox .more:hover  {
+  background-color: var(--chn-hvr);
+}
+
+.cnBox .more {
+  padding: 0.6rem;
+  border-radius: 100%;
+}
+
 
 .detailInfoBox .detailInfo {
   max-width: 50rem;
@@ -389,7 +445,7 @@
   line-height: 1.5;
   background-color: initial;
   width: 100%;
-  white-space: pre;
+  white-space: break-spaces;
 }
 
 .detailVideo {

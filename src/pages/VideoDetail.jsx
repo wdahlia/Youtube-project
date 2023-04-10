@@ -6,6 +6,8 @@ import { useYoutubeContext } from '../context/YoutubeProvider';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { BiLike, BiDislike, BiShareAlt } from 'react-icons/bi';
+import { FiMoreHorizontal } from 'react-icons/fi'
 
 
 export default function VideoDetail() {
@@ -16,7 +18,6 @@ export default function VideoDetail() {
 
   title = title.replace(/&#39;/g, "'");
 
-  console.log(description);
   // state로 해서 id 값을 가져온다
 
   const { mode } = useYoutubeContext();
@@ -75,9 +76,21 @@ export default function VideoDetail() {
         <div className='detailInfoBox box'>
           <h1 className='tit'>{title}</h1>
           <div className='cnBox box'>
-            { url && <img src={url} className='cnThumb' /> }
-            <p className='cnTit'>{channelTitle}</p>
-            <button>구독</button>
+            <div className='titBox box'>
+              { url && <img src={url} className='cnThumb' /> }
+              <p className='cnTit'>{channelTitle}</p>
+            </div>
+            <div style={{ width : '35%', textAlign : 'start'}}>
+              <button className='subscribe bt'>구독</button>
+            </div>
+            <div className='dt box'>
+              <div className='likeBox box'>
+                <button className='like chn bt'><BiLike style={{ verticalAlign : 'middle', fontSize: '1.1rem' }} /> 1010만</button>
+                <button className='dislike chn bt'><BiDislike style={{ verticalAlign : 'middle', fontSize: '1.1rem' }}/></button>
+              </div>
+              <button className='share chn bt'><BiShareAlt style={{ verticalAlign : 'middle', fontSize: '1.1rem' }} /> 공유</button>
+              <button className='more chn bt'><FiMoreHorizontal style={{ verticalAlign : 'middle', fontSize: '1.1rem' }} /></button>
+            </div>
           </div>
           <div className='detailInfo'>
             <h3>{publishTime}</h3>

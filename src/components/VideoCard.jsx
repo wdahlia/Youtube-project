@@ -23,6 +23,16 @@ export default function VideoCard({ data, videoId, ...res }) {
     params : { key : process.env.REACT_APP_YOUTUBE_SECRET_KEY }
   });
 
+  // const { isLoading, data : video } = useQuery({
+  //   queryKey : ['video', videoId ],
+  //   queryFn : () => instance.get('/videos/', {
+  //     params : {
+  //       part : 'statistics',
+  //       id : videoId,
+  //     }
+  //   })
+  // })
+
   const { isLoading, data : channels } = useQuery({
     queryKey : ['channel', channelId ],
     queryFn : () => instance.get('/channels/', {
@@ -41,7 +51,6 @@ export default function VideoCard({ data, videoId, ...res }) {
     return <div>Loading...</div>
   }
 
-  console.log(channels);
 
   const { snippet : { thumbnails : { medium : { url }}}, statistics : { subscriberCount } } = channels;
 

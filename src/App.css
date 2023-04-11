@@ -339,7 +339,6 @@
 }
 
 .detailInfoBox .tit {
-  margin-top: 0.5rem;
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.2px;
@@ -350,10 +349,15 @@
   align-items: center;
   column-gap: 0.5rem;
   justify-content: space-between;
+  margin: 0.4rem 0;
 }
 
 .cnBox .titBox {
   column-gap: 0.5rem;
+}
+
+.titBox .cnCount {
+  margin-top: 0.1rem;
 }
 
 .cnBox .cnThumb {
@@ -489,7 +493,8 @@
   text-overflow: ellipsis;
 }
 
-.relVideoInfo .cnTit {
+.relVideoInfo .cnTit,
+.titBox .cnCount {
   color: var(--sub-txt);
   font-size: 0.8rem;
   font-weight: 600;
@@ -504,3 +509,43 @@
 }
 
 
+
+/* loading placeholder */
+
+.ph {
+  display: inline-block;
+  opacity: 0.5;
+  background-color: var(--ph);
+  cursor: wait;
+  vertical-align: middle;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.ph-img {
+  width: 360px;
+  height: 200px;
+}
+
+.ph-lg,
+.ph-md,
+.ph-sm {
+  height: 1.5em;
+}
+
+.ph-lg {
+  width: 360px;
+}
+
+.ph-md {
+  width: 200px;
+}
+
+.ph-sm {
+  width: 80px;
+}

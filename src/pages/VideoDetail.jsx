@@ -13,7 +13,8 @@ import { FiMoreHorizontal } from 'react-icons/fi'
 export default function VideoDetail() {
   const { state } = useLocation();
 
-  const { data, videoId, url } = state;
+  const { data, videoId, url, count } = state;
+
   let { title, publishedAt, description, channelTitle } = data;
 
   title = title.replace(/&#39;/g, "'");
@@ -78,10 +79,13 @@ export default function VideoDetail() {
           <div className='cnBox box'>
             <div className='titBox box'>
               { url && <img src={url} className='cnThumb' /> }
-              <p className='cnTit'>{channelTitle}</p>
-            </div>
-            <div style={{ width : '35%', textAlign : 'start'}}>
-              <button className='subscribe bt'>구독</button>
+              <div>
+                <p className='cnTit'>{channelTitle}</p>
+                <p className='cnCount'>{count}</p>
+              </div>
+              <div style={{ marginLeft : '1rem' }}>
+                <button className='subscribe bt'>구독</button>
+              </div>
             </div>
             <div className='dt box'>
               <div className='likeBox box'>

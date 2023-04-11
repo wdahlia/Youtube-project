@@ -50,10 +50,10 @@ function fixedCount(num) {
 //   }
 // }
 
-export function subscriberCount(value) {
-  return fixedCount(value) + '명'
+export function countSubscriber(value) {
+  return '구독자 ' + fixedCount(value) + '명'
 }
 
-export function viewCount(value) {
-  return fixedCount(value) + '회'
+export function countView(value) {
+  return '조회수 ' + fixedCount(value) + '회'
 }

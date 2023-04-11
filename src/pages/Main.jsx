@@ -18,17 +18,19 @@ export default function Main() {
     queryKey : ['popularVideos'],
     queryFn : () => instance.get('/videos/', {
       params : {
-        part : 'snippet',
+        part : 'snippet,contentDetails,statistics',
         chart : 'mostPopular',
         regionCode: 'KR',
         maxResults : 25,
       }
     }).then((res) => {
+      console.log(res.data);
       return res.data.items
     }),
     retry: 1,
     staleTime : 1000 * 60 * 500,
   });
+
 
   return (
     <section className='mainBox box'>

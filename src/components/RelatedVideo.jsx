@@ -3,7 +3,7 @@ import { changeDateFormat } from '../util/date';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { viewCount } from '../util/counter';
+import { countView } from '../util/counter';
 
 
 export default function RelatedVideo({ videoId, data }) {
@@ -39,7 +39,7 @@ export default function RelatedVideo({ videoId, data }) {
 
   let { snippet : { thumbnails : { medium : { url }}}, statistics : { subscriberCount : count } } = channels;
 
-  count = viewCount(count)
+  count = countView(count)
   const moveToDetail = () => {
     navigate(`/watch?v=${videoId}`, { state : { data, videoId, url } });
   }

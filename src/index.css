@@ -18,6 +18,7 @@
   --subscribe-hvr: #262626;
   --chn-btn: #d6d5d54b;
   --chn-hvr: #bbbbbb5b;
+  --ph: #303030;
 }
 
 * {
@@ -46,6 +47,7 @@
   --subscribe-hvr: #dedcdc;
   --chn-btn: #FFFFFF1A;
   --chn-hvr: #ffffff32;
+  --ph: #D8D4D4;
 }
 
 input {

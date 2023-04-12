@@ -8,12 +8,13 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { BiLike, BiDislike, BiShareAlt } from 'react-icons/bi';
 import { FiMoreHorizontal } from 'react-icons/fi'
+import { changeDateFormat } from '../util/date';
 
 
 export default function VideoDetail() {
   const { state } = useLocation();
 
-  const { data, videoId, url, count } = state;
+  const { data, videoId, url, count, like, view } = state;
 
   let { title, publishedAt, description, channelTitle } = data;
 
@@ -24,8 +25,7 @@ export default function VideoDetail() {
   const { mode } = useYoutubeContext();
 
   let publishTime = new Date(publishedAt);
-  publishTime = `${publishTime.getFullYear()}. ${publishTime.getMonth() + 1}. ${publishTime.getDate()}`
-
+  publishTime = changeDateFormat(publishTime);
   // related Video값 fetching 해오기
 
   const instance = axios.create({
@@ -42,12 +42,12 @@ export default function VideoDetail() {
         maxResults : 25,
         type : 'video',
       }
-    }).then((res) => {
-      return res.data.items
     }),
+    select : (res) => { return res.data.items },
     retry : 1,
     staleTime : 1000 * 60 * 100,
   });
+
 
   return (
     <>
@@ -89,7 +89,7 @@ export default function VideoDetail() {
             </div>
             <div className='dt box'>
               <div className='likeBox box'>
-                <button className='like chn bt'><BiLike style={{ verticalAlign : 'middle', fontSize: '1.1rem' }} /> 1010만</button>
+                <button className='like chn bt'><BiLike style={{ verticalAlign : 'middle', fontSize: '1.1rem' }} /> {like}</button>
                 <button className='dislike chn bt'><BiDislike style={{ verticalAlign : 'middle', fontSize: '1.1rem' }}/></button>
               </div>
               <button className='share chn bt'><BiShareAlt style={{ verticalAlign : 'middle', fontSize: '1.1rem' }} /> 공유</button>
@@ -97,7 +97,7 @@ export default function VideoDetail() {
             </div>
           </div>
           <div className='detailInfo'>
-            <h3>{publishTime}</h3>
+            <h3>{view} {publishTime}</h3>
             <p className='des'>{description}</p>
           </div>
         </div>

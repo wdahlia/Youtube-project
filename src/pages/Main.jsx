@@ -24,7 +24,6 @@ export default function Main() {
         maxResults : 25,
       }
     }).then((res) => {
-      console.log(res.data);
       return res.data.items
     }),
     retry: 1,

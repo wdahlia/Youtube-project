@@ -23,10 +23,8 @@ export default function VideoArea() {
         part : 'snippet',
         regionCode : 'KR',
       }
-    }).then((res) => {
-      console.log(res.data);
-      return res.data.items;
     }),
+    select : (res) => { return res.data.items },
     retry : 1,
     staleTime : 1000 * 60 * 200,
   });

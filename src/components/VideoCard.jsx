@@ -3,7 +3,7 @@ import { changeDateFormat } from '../util/date';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { countSubscriber } from '../util/counter';
+import { countLike, countSubscriber, countView } from '../util/counter';
 
 export default function VideoCard({ data, videoId, ...res }) {
   const [hover, setHover] = useState(false);
@@ -24,30 +24,41 @@ export default function VideoCard({ data, videoId, ...res }) {
     params : { key : process.env.REACT_APP_YOUTUBE_SECRET_KEY }
   });
 
-  // const { isLoading, data : video } = useQuery({
-  //   queryKey : ['video', videoId ],
-  //   queryFn : () => instance.get('/videos/', {
-  //     params : {
-  //       part : 'statistics',
-  //       id : videoId,
-  //     }
-  //   })
-  // })
+  // useQuery 비동기로 실행되기에 한 컴포넌트에 여러개의 useQuery 사용 시 병렬적으로 처리
+  // 즉, 변수에 대한 로딩, 성공, 실패처리를 모두 진행
+  // useQueries 사용해서도 코드 구현 가능
+  // Parallel Queries
 
-  const { isLoading, data : channels } = useQuery({
+  const { isLoading : firstLoad , data: video } = useQuery({
+    queryKey : ['video', videoId ],
+    queryFn : () => instance.get('/videos/', {
+      params : {
+        part : 'statistics',
+        id : videoId,
+      } 
+    }), 
+    select : (res) => {
+      return res.data.items[0];
+    },
+    retry : 1,
+    staleTime : 1000 * 60 * 1000,
+  });
+
+  const { onSuccess, isLoading , data : channels } = useQuery({
     queryKey : ['channel', channelId ],
     queryFn : () => instance.get('/channels/', {
       params : {
         part : 'snippet,statistics',
         id : channelId
       } 
-    }).then((res) => {
-      console.log(res.data)
-      return res.data.items[0];
     }),
+    select : (res) => { 
+      return res.data.items[0];
+    },
     retry : 2,
-    staleTime : 1000 * 60 * 100,
+    staleTime : 1000 * 60 * 1000,
   })
+
 
   if (isLoading) {
     return ( 
@@ -62,13 +73,20 @@ export default function VideoCard({ data, videoId, ...res }) {
     )
   }
 
+  if (onSuccess) {
+    console.log('요청 완료')
+  }
 
-  const { snippet : { thumbnails : { medium : { url }}}, statistics : { subscriberCount } } = channels;
+  let { snippet : { thumbnails : { medium : { url }}}, statistics : { subscriberCount: count } } = channels;
+  let { statistics : { viewCount: view, likeCount : like } } = video;
 
-  const count = countSubscriber(subscriberCount);
+  count = countSubscriber(count);
+  view = countView(view);
+  like = countLike(like);
+
 
   const moveToDetail = () => {
-    navigate(`/watch?v=${videoId}`, { state : { data, videoId, url, count } });
+    navigate(`/watch?v=${videoId}`, { state : { data, videoId, url, count, like } });
   }
 
 
@@ -101,10 +119,10 @@ export default function VideoCard({ data, videoId, ...res }) {
         <div className='channelBox'>
           { url && <img className='cnThumb' src={url} alt='channelThumbnail'/> }
           <p className='cnTit'>{channelTitle}</p>
-          <p>{count}</p>
+          { res.main ? null : <p>{count}</p> }
         </div>
         { res.main ? null : <p className='des'>{description}</p> }
-        <p className='time'>{ res.main ? publishedAt : publishTime }</p>
+        <span className='time'>{view} ⦁ { res.main ? publishedAt : publishTime }</span>
       </div>
     </li>
   );

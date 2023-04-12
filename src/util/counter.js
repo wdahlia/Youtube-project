@@ -2,21 +2,21 @@
 function fixedCount(num) {
   if (num.length >= 9) {
     if (Number(num) % 1.0e+8 === 0) {
-      return (Number(num) / 1.0e+8) + '억'
+      return Math.round((Number(num) / 1.0e+8)) + '억'
     } else {
       return (Number(num) / 1.0e+8).toFixed(1) + '억'
     }
   } else if (num.length >= 6) {
-    return (Number(num) / 1.0e+4) + '만'
+    return Math.round((Number(num) / 1.0e+4)) + '만'
   } else if (num.length >= 5) {
     if (Number(num) % 1.0e+4 === 0) {
-      return (Number(num) / 1.0e+4) + '만'
+      return Math.round((Number(num) / 1.0e+4)) + '만'
     } else {
       return (Number(num) / 1.0e+4).toFixed(1) + '만'
     }
   } else if (num.length >= 4) {
     if (Number(num) % 1.0e+3 === 0) {
-      return (Number(num) / 1.0e+3) + '만'
+      return Math.round((Number(num) / 1.0e+3)) + '만'
     } else {
       return (Number(num) / 1.0e+3).toFixed(1) + '만'
     }
@@ -56,4 +56,8 @@ export function countSubscriber(value) {
 
 export function countView(value) {
   return '조회수 ' + fixedCount(value) + '회'
+}
+
+export function countLike(value) {
+  return fixedCount(value)
 }

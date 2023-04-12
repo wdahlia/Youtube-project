@@ -532,6 +532,11 @@
   height: 200px;
 }
 
+.ph-thumb {
+  width: 240px;
+  height: 130px;
+}
+
 .ph-lg,
 .ph-md,
 .ph-sm {

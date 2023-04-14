@@ -18,7 +18,7 @@ export default function VideoDetail() {
 
   let { title, publishedAt, description, channelTitle } = data;
 
-  title = title.replace(/&#39;/g, "'");
+  title = title.replace(/&#39;/g, "'"); 
 
   // state로 해서 id 값을 가져온다
 
@@ -48,6 +48,9 @@ export default function VideoDetail() {
     staleTime : 1000 * 60 * 100,
   });
 
+  if (isLoading) {
+    console.log('....😮‍💨 대기중');
+  }
 
   return (
     <>

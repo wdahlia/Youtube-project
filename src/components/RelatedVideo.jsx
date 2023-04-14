@@ -19,7 +19,7 @@ export default function RelatedVideo({ videoId, data }) {
     params : { key : process.env.REACT_APP_YOUTUBE_SECRET_KEY }
   });
 
-  const { data : channels } = useQuery({
+  const { isLoading : first, data : channels } = useQuery({
     queryKey : ['channel', channelId ],
     queryFn : () => instance.get('/channels/', {
       params : {
@@ -27,10 +27,11 @@ export default function RelatedVideo({ videoId, data }) {
         id : channelId
       } 
     }),
-    select : (res) => { return res.data.items[0] },
+    select : res => (res.data.items.map((item) => ({ ...item, url : item.snippet.thumbnails.medium.url, count : item.statistics.subscriberCount }))[0]),
     retry : 2,
     staleTime : 1000 * 60 * 100,
   })
+
 
   const { isLoading, data: video } = useQuery({
     queryKey : ['video', videoId ],
@@ -40,12 +41,13 @@ export default function RelatedVideo({ videoId, data }) {
         id : videoId,
       } 
     }),
-    select : (res) => { return res.data.items[0] },
+    select : (res) => {
+      res = res.data.items.map((item) => ({ ...item, thumb : item.snippet.thumbnails.medium.url, view : item.statistics.viewCount, like : item.statistics.likeCount }))[0]
+      return res
+    },
     retry : 1,
     staleTime : 1000 * 60 * 1000,
   });
-
-
 
 
   if (isLoading) {
@@ -61,15 +63,14 @@ export default function RelatedVideo({ videoId, data }) {
     )
   }
 
-  let { snippet : { thumbnails : { medium : { url }}}, statistics : { subscriberCount : count } } = channels;
-  let { snippet : { thumbnails : { medium : { url : thumb }}}, statistics : { viewCount : view, likeCount : like } } = video;
+  const view = video && countView(video.view);
+  const like = video && countLike(video.like);
+  const count = channels && countSubscriber(channels.count);
+  const thumb = video && video.thumb;
 
-  view = countView(view);
-  like = countLike(like);
-  count = countSubscriber(count);
 
   const moveToDetail = () => {
-    navigate(`/watch?v=${videoId}`, { state : { data, videoId, url, view, like, count } });
+    navigate(`/watch?v=${videoId}`, { state : { data, videoId, url : channels.url, view, like, count } });
   }
 
   // channelCount moveToDetail에 담아 보내야함
@@ -77,17 +78,17 @@ export default function RelatedVideo({ videoId, data }) {
   
 
   return (
-    <li 
-      className='detailVideo box'
-      onClick={moveToDetail}
-      >
-      <img src={thumb} className='thumb' alt='relatedVideo' />
-      <div className='relVideoInfo box'>
-        <h4 className='tit'>{title}</h4>
-        <p className='cnTit'>{channelTitle}</p>
-        <span className='time'>{view} ⦁ {publishedAt}</span>
-      </div>
-    </li>
-  );
+     <li 
+       className='detailVideo box'
+       onClick={moveToDetail}
+       >
+      { thumb && <img src={thumb} className='thumb' alt='relatedVideo' /> }
+       <div className='relVideoInfo box'>
+         <h4 className='tit'>{title}</h4>
+         <p className='cnTit'>{channelTitle}</p>
+         <span className='time'>{view} ⦁ {publishedAt}</span>
+       </div>
+     </li>
+   );
 }
 

@@ -29,22 +29,23 @@ export default function VideoCard({ data, videoId, ...res }) {
   // useQueries 사용해서도 코드 구현 가능
   // Parallel Queries
 
-  const { isLoading : firstLoad , data: video } = useQuery({
+  const { isLoading : first, onSuccess : success, data: video } = useQuery({
     queryKey : ['video', videoId ],
-    queryFn : () => instance.get('/videos/', {
+    queryFn : async () => instance.get('/videos/', {
       params : {
         part : 'statistics',
         id : videoId,
       } 
-    }), 
+    }),
     select : (res) => {
-      return res.data.items[0];
+      res = res.data.items.map((item) => ({ ...item, view : item.statistics.viewCount, like : item.statistics.likeCount }))[0];
+      return res
     },
     retry : 1,
     staleTime : 1000 * 60 * 1000,
   });
 
-  const { onSuccess, isLoading , data : channels } = useQuery({
+  const { onSuccess, isLoading, data : channels } = useQuery({
     queryKey : ['channel', channelId ],
     queryFn : () => instance.get('/channels/', {
       params : {
@@ -52,15 +53,16 @@ export default function VideoCard({ data, videoId, ...res }) {
         id : channelId
       } 
     }),
-    select : (res) => { 
-      return res.data.items[0];
+    select : (res) => {
+      res = res.data.items.map((item) => ({ ...item, url : item.snippet.thumbnails.medium.url, count : item.statistics.subscriberCount }))[0];
+      return res
     },
     retry : 2,
     staleTime : 1000 * 60 * 1000,
   })
 
 
-  if (isLoading) {
+  if (isLoading || first) {
     return ( 
       <li className={ res.main ? `cardBox vtc` : `cardBox` } style={{ rowGap : '1rem'}}>
         <div className='ph ph-img'></div>
@@ -73,20 +75,19 @@ export default function VideoCard({ data, videoId, ...res }) {
     )
   }
 
-  if (onSuccess) {
-    console.log('요청 완료')
-  }
+  const count = countSubscriber(channels.count);
+  const view = countView(video.view);
+  const like = countLike(video.like);
 
-  let { snippet : { thumbnails : { medium : { url }}}, statistics : { subscriberCount: count } } = channels;
-  let { statistics : { viewCount: view, likeCount : like } } = video;
 
-  count = countSubscriber(count);
-  view = countView(view);
-  like = countLike(like);
+  // console.log(channels);
+  // let { snippet : { thumbnails : { medium : { url }}}, statistics : { subscriberCount: count } } = channels;
+  // let { statistics : { viewCount: view, likeCount : like } } = video;
+
 
 
   const moveToDetail = () => {
-    navigate(`/watch?v=${videoId}`, { state : { data, videoId, url, count, like } });
+    navigate(`/watch?v=${videoId}`, { state : { data, videoId, url : channels.url , count, like } });
   }
 
 
@@ -117,7 +118,7 @@ export default function VideoCard({ data, videoId, ...res }) {
       <div className={ res.main ? `cardInfoBox box vtc` : `cardInfoBox box`}>
         <h1 className={ res.main ? `tit vtc` : `tit`}>{title}</h1>
         <div className='channelBox'>
-          { url && <img className='cnThumb' src={url} alt='channelThumbnail'/> }
+          { channels.url && <img className='cnThumb' src={channels.url} alt='channelThumbnail'/> }
           <p className='cnTit'>{channelTitle}</p>
           { res.main ? null : <p>{count}</p> }
         </div>

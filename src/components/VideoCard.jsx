@@ -68,6 +68,8 @@ export default function VideoCard({ data, videoId, ...res }) {
     ]
   });
 
+  // useQueries 이용해서 구현 완료,
+  // 다만, useQuery 내부에서 우선 data 값 내부에 url, count, view, like 심는 방법이 있을까 고민해볼 필요성 존재
 
 
       //  const { isLoading : first, onSuccess : success, data: video } = useQuery({
@@ -92,8 +94,7 @@ export default function VideoCard({ data, videoId, ...res }) {
 
 
   const channels = queries[1].data.data.items.map((item) => ({ ...item, url : item.snippet.thumbnails.medium.url, count : countSubscriber(item.statistics.subscriberCount) }))[0];
-  const video = queries[0].data.data.items.map((item) => ({ ...item, view : countView(item.statistics.viewCount), like : countLike(item.statistics.likeCount) }))[0];
-
+  const video = queries[0].data.data.items.map((item) => ({ ...item, view : countView(item.statistics.viewCount), like : item.statistics.likeCount }))[0];
 
   // if (isSuccess) {
   //   console.log(items)
@@ -115,7 +116,7 @@ export default function VideoCard({ data, videoId, ...res }) {
 
 
   const moveToDetail = () => {
-    navigate(`/watch?v=${videoId}`, { state : { data, videoId, url : channels.url, count : channels.count, like : video.like } });
+    navigate(`/watch?v=${videoId}`, { state : { data, videoId, url : channels.url, count : channels.count, like : countLike(video.like) } });
   }
 
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import mockData from '../mockSearchData'
 import VideoCard from '../components/VideoCard';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';

@@ -1,7 +1,5 @@
 import React from 'react';
-import relatedVideos from '../mockRelatedVideo';
 import RelatedVideo from '../components/RelatedVideo';
-import VideoCard from '../components/VideoCard';
 import { useYoutubeContext } from '../context/YoutubeProvider';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';

@@ -92,6 +92,8 @@ export default function RelatedVideo({ videoId, data }) {
     )
   }
 
+  console.log(queries[0].data.data.items)
+
   // const view = video?.video && countView(video.view);
   // const like = video?.video && countLike(video.like);
   // const count = channels?.channels && countSubscriber(channels.count);

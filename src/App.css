@@ -108,7 +108,7 @@
   top: 0.8rem;
   left: 1rem;
   color: var(--input-icon);
-  background-color: var(--fcs-bg);
+  background-color: initial;
 }
 
 

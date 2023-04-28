@@ -29,7 +29,7 @@ export default function RelatedVideo({ videoId, data }) {
           part : 'snippet,statistics',
           id : videoId,
         },
-        retry : 1,
+        retry : 2,
         staleTime : 1000 * 60 * 1000,
         })
       },
@@ -92,7 +92,6 @@ export default function RelatedVideo({ videoId, data }) {
     )
   }
 
-  console.log(queries[0].data.data.items)
 
   // const view = video?.video && countView(video.view);
   // const like = video?.video && countLike(video.like);
